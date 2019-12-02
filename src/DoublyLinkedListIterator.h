@@ -30,14 +30,14 @@ class DoublyLinkedListIterator {
   DoublyLinkedListIterator(const DoublyLinkedListIterator<T>& orig);
 
   //are the two iterators equal?
-  bool operator==(const DoublyLinkedListIterator<T>& rhs) const;
+  bool operator==(const DoublyLinkedListIterator<T>& rhs) const; //DONE
   //are the two iterators different?
-  bool operator!=(const DoublyLinkedListIterator<T>& rhs) const;
+  bool operator!=(const DoublyLinkedListIterator<T>& rhs) const; //DONE
   //is the iterator safe to dereference?
-  explicit operator bool() const;
+  explicit operator bool() const; //DONE
 
   //go to the next element
-  DoublyLinkedListIterator<T>& operator++(); //pre
+  DoublyLinkedListIterator<T>& operator++(); //pre //DONE
   const DoublyLinkedListIterator<T> operator++(int);//post
 
   //go to the previous element
@@ -49,7 +49,7 @@ class DoublyLinkedListIterator {
   reference operator*();
 
  private:
-  DoublyLinkedNode<T>* curNode;
+  DoublyLinkedNode<T>* curNode;//todo why is it invalid?
 };
 
 template<typename T>
@@ -74,7 +74,8 @@ bool DoublyLinkedListIterator<T>::operator==(const DoublyLinkedListIterator<T>& 
 
 template<typename T>
 bool DoublyLinkedListIterator<T>::operator!=(const DoublyLinkedListIterator<T>& rhs) const {
-  return !(*this == rhs);
+  return !(this == rhs);
+  //return !(*this == rhs);
 }
 
 template<typename T>
@@ -84,7 +85,7 @@ DoublyLinkedListIterator<T>::operator bool() const {
 
 template<typename T>
 DoublyLinkedListIterator<T>& DoublyLinkedListIterator<T>::operator++() {
-  curNode = curNode->getNext();
+  curNode = curNode->next;
   return *this;
 }
 
