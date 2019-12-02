@@ -77,7 +77,7 @@ class DoublyLinkedList {
   //And the iterator was pointing to the 9 and we wanted to
   //insert -22 the result would be
   //1 <-> 22 <-> 9 <-> 17
-  void insert(iterator& position, const T& value); //todo ask butner
+  void insert(iterator& position, const T& value); //DONE
 
   //remove the element at the position pointed to
   //by the iterator.
@@ -152,7 +152,8 @@ T& DoublyLinkedList<T>::back() {
 
 template<typename T>
 void DoublyLinkedList<T>::push_front(const T& value) {
-  DoubleLinkedNode<T>* node= new DoublyLinkedNode<T>(value);
+  //DoublyLinkedNode<T>* node= new DoublyLinkedNode<T>(value);
+  auto* node= new DoublyLinkedNode<T>(value);
   if (head == nullptr){
     head = node;
     tail = node;
@@ -167,8 +168,8 @@ void DoublyLinkedList<T>::push_front(const T& value) {
 
 template<typename T>
 void DoublyLinkedList<T>::push_back(const T& value) {
-  //DoubleLinkedNode<T>* currNode = new DoubleLinkedNode<T>(value);
-  auto* currNode = new DoubleLinkedNode<T>(value);
+  //DoublyLinkedNode<T>* currNode = new DoublyLinkedNode<T>(value);
+  auto* currNode = new DoublyLinkedNode<T>(value);
   if(head){
     tail->next = currNode;
     currNode->prev = tail;
@@ -225,11 +226,11 @@ typename DoublyLinkedList<T>::iterator DoublyLinkedList<T>::end() {
 
 template<typename T>
 void DoublyLinkedList<T>::insert(iterator& position, const T& value) {
-  DoubleLinkedNode* newNode; //TODO find out whi it doesnt recognize
+  Node_Ptr newNode;
 
-  newNode.data = value;
-  newNode.next = position;
-  newNode.prev = position->prev;
+  newNode->data = value;
+  newNode->next = position;
+  newNode->prev = position->prev;
 
   position->prev->next = newNode;
   position->prev = newNode;

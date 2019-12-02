@@ -16,15 +16,15 @@ template<typename T>
 class ConstReverseDoublyLinkedListIterator;
 
 template<typename T>
-class DoubleLinkedNode {
+class DoublyLinkedNode {
 
  public:
   T data;
-  DoubleLinkedNode<T>* next;
-  DoubleLinkedNode<T>*  prev;
+  DoublyLinkedNode<T>* next;
+  DoublyLinkedNode<T>*  prev;
 
-  DoubleLinkedNode() = default;
-  explicit DoubleLinkedNode(T data) : data(data), next(nullptr), prev(nullptr) {}
+  DoublyLinkedNode() = default;
+  explicit DoublyLinkedNode(T data) : data(data), next(nullptr), prev(nullptr) {}
 
 };
 
