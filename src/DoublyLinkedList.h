@@ -112,13 +112,12 @@ DoublyLinkedList<T>::DoublyLinkedList()  {
   length = 0;
 }
 
-template<typename T>//todo what?
+template<typename T>
 DoublyLinkedList<T>::DoublyLinkedList(const std::vector<T>& values)  {
   DoublyLinkedList list;
-  for (auto elem: values){
+  for (auto elem: values) {
     list.push_back(elem);
   }
-  length = values.size();
 }
 
 template<typename T>
@@ -212,14 +211,19 @@ void DoublyLinkedList<T>::push_back(const T& value) {
 
 template<typename T>
 void DoublyLinkedList<T>::clear() {
-  while (head != nullptr) {
-  head = head->next;
-  delete head->prev;
+//  while (head != nullptr) {
+//  head = head->next;
+//  delete head->prev;
+//  }
+//  delete tail;
+//  tail = nullptr;
+  for (int i = 0; i < this->size(); i++) {
+    auto temp = head;
+    delete head;
+    head = temp->next;
   }
-  delete tail;
-  tail = nullptr;
+  length = 0;
 }
-
 template<typename T>
 DoublyLinkedList<T>::~DoublyLinkedList() {
   clear();
@@ -242,7 +246,7 @@ typename DoublyLinkedList<T>::iterator DoublyLinkedList<T>::begin() {
 
 template<typename T>
 typename DoublyLinkedList<T>::iterator DoublyLinkedList<T>::end() {
-  return DoublyLinkedListIterator<T>(tail);
+  return DoublyLinkedListIterator<T>(nullptr);
 }
 
 template<typename T>
