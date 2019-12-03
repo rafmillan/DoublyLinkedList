@@ -24,10 +24,10 @@ class DoublyLinkedListIterator {
   explicit DoublyLinkedListIterator(DoublyLinkedNode<T>* start);
 
   //set the iterator to be at null
-  DoublyLinkedListIterator();
+  DoublyLinkedListIterator(); //Done
 
   //copy constructor
-  DoublyLinkedListIterator(const DoublyLinkedListIterator<T>& orig);
+  DoublyLinkedListIterator(const DoublyLinkedListIterator<T>& orig); //Done
 
   //are the two iterators equal?
   bool operator==(const DoublyLinkedListIterator<T>& rhs) const; //DONE
@@ -38,28 +38,26 @@ class DoublyLinkedListIterator {
 
   //go to the next element
   DoublyLinkedListIterator<T>& operator++(); //pre //DONE
-  const DoublyLinkedListIterator<T> operator++(int);//post
+  const DoublyLinkedListIterator<T> operator++(int);//post //Done
 
   //go to the previous element
-  DoublyLinkedListIterator<T>& operator--(); //pre
-  const DoublyLinkedListIterator<T> operator--(int); //post
+  DoublyLinkedListIterator<T>& operator--(); //pre //DONE
+  const DoublyLinkedListIterator<T> operator--(int); //post //DONE
 
   //get a reference to the value
-  const_reference operator*() const;
-  reference operator*();
+  const_reference operator*() const; //Done
+  reference operator*(); //Done
 
  private:
-  DoublyLinkedNode<T>* curNode;//todo why is it invalid?
+  DoublyLinkedNode<T>* curNode;
 };
 
 template<typename T>
 DoublyLinkedListIterator<T>::DoublyLinkedListIterator(DoublyLinkedNode<T>* start) : curNode(start) {
-
 }
 
 template<typename T>
 DoublyLinkedListIterator<T>::DoublyLinkedListIterator() : curNode(nullptr){
-
 }
 
 template<typename T>
@@ -74,8 +72,7 @@ bool DoublyLinkedListIterator<T>::operator==(const DoublyLinkedListIterator<T>& 
 
 template<typename T>
 bool DoublyLinkedListIterator<T>::operator!=(const DoublyLinkedListIterator<T>& rhs) const {
-  return !(this == rhs);
-  //return !(*this == rhs);
+  return !(*this == rhs);
 }
 
 template<typename T>
@@ -85,7 +82,13 @@ DoublyLinkedListIterator<T>::operator bool() const {
 
 template<typename T>
 DoublyLinkedListIterator<T>& DoublyLinkedListIterator<T>::operator++() {
-  curNode = curNode->next;
+  curNode = curNode->getNext();
+  return *this;
+}
+
+template<typename T>
+DoublyLinkedListIterator<T>& DoublyLinkedListIterator<T>::operator++() {
+  curNode = curNode->getNext();
   return *this;
 }
 

@@ -159,8 +159,8 @@ void DoublyLinkedList<T>::push_front(const T& value) {
     tail = node;
   }
   else{
-    head->prev = node;
-    node->next = head;
+    head->getprev() = node;
+    node->getNext() = head;
     head = node;
   }
   length++;
@@ -171,9 +171,9 @@ void DoublyLinkedList<T>::push_back(const T& value) {
   //DoublyLinkedNode<T>* currNode = new DoublyLinkedNode<T>(value);
   auto* currNode = new DoublyLinkedNode<T>(value);
   if(head){
-    tail->next = currNode;
-    currNode->prev = tail;
-    currNode->next = nullptr;
+    tail->getNext() = currNode;
+    currNode->getPrev() = tail;
+    currNode->getNext() = nullptr;
   }
   else{
     head = currNode;
@@ -197,7 +197,7 @@ DoublyLinkedList<T>::~DoublyLinkedList() {
   Node_Ptr curr = head;
   Node_Ptr prev = head;
   while(curr){
-    curr = curr -> next;
+    curr = curr -> getNext();
     delete prev;
     prev = curr;
   }
@@ -228,19 +228,19 @@ template<typename T>
 void DoublyLinkedList<T>::insert(iterator& position, const T& value) {
   Node_Ptr newNode;
 
-  newNode->data = value;
-  newNode->next = position;
-  newNode->prev = position->prev;
+  newNode->getValue() = value;
+  newNode->getNext() = position;
+  newNode->getPrev() = position->getPrev();
 
-  position->prev->next = newNode;
-  position->prev = newNode;
+  position->getPrev()->getNext() = newNode;
+  position->getprev() = newNode;
 
 }
 
 template<typename T>
 void DoublyLinkedList<T>::erase(iterator& position) {
-  position->prev->next = position->next;
-  position->next->prev = position->prev;
+  position->getPrev()->getNext() = position->getNext();
+  position->getNext()->getPrev() = position->getPrev();
   delete position;
 }
 
