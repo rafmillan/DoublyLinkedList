@@ -187,23 +187,16 @@ void DoublyLinkedList<T>::push_back(const T& value) {
 template<typename T>
 void DoublyLinkedList<T>::clear() {
   for(int i = 0; i < this->size(); i++) {
-    auto headTemp = head;
+    auto tHead= head;
     delete head;
-    head = headTemp->findNext();
+    head = tHead->next;
   }
   length = 0;
 }
 
 template<typename T>
 DoublyLinkedList<T>::~DoublyLinkedList() {
-  Node_Ptr curr = head;
-  Node_Ptr prev = head;
-  while(curr){
-    curr = curr -> getNext();
-    delete prev;
-    prev = curr;
-  }
-  delete prev;
+  clear();
 }
 
 template<typename T>
