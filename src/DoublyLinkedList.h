@@ -87,9 +87,6 @@ class DoublyLinkedList {
   //1 <-> 17
   void erase(iterator& position); //DONE
 
- protected:
-  void clearImpl(DoublyLinkedNode<T>* node);
-
  private:
   Node_Ptr head;
   Node_Ptr tail;
@@ -136,22 +133,22 @@ int DoublyLinkedList<T>::size() const {
 
 template<typename T>
 const T& DoublyLinkedList<T>::front() const {
-  return head->getValue();
+  return head->value;
 }
 
 template<typename T>
 T& DoublyLinkedList<T>::front() {
-  return head->getValue();
+  return head->value;
 }
 
 template<typename T>
 const T& DoublyLinkedList<T>::back() const {
-  return tail->getValue();
+  return tail->value;
 }
 
 template<typename T>
 T& DoublyLinkedList<T>::back() {
-  return tail->getValue();
+  return tail->value;
 }
 
 template<typename T>
@@ -187,10 +184,12 @@ void DoublyLinkedList<T>::push_back(const T& value) {
 
 template<typename T>
 void DoublyLinkedList<T>::clear() {
-  clearImpl(head);
-  head = nullptr;
+  while (head != nullptr) {
+  head = head->next;
+  delete head->prev;
+  }
+  delete tail;
   tail = nullptr;
-  length = 0;
 }
 
 template<typename T>
@@ -222,7 +221,7 @@ template<typename T>
 void DoublyLinkedList<T>::insert(iterator& position, const T& value) {
   DoublyLinkedNode<T>* newNode = new DoublyLinkedNode<T>(value);
 
-  newNode->getValue() = value;
+  newNode->value = value;
   newNode->next = position.getNode();
   newNode->prev = position.getNode()->prev;
 
@@ -295,16 +294,6 @@ std::istream& operator>>(std::istream& in, DoublyLinkedList<T>& doublyLinkedList
     doublyLinkedList.push_back(data);
   }
   return in;
-}
-
-template<typename T>
-void clearImpl(DoublyLinkedNode<T>* node){
-  if (node == nullptr) {
-    return;
-  } else {
-    clearImpl(node->next);
-    delete node;
-  }
 }
 
 #endif //LINKEDLIST_DOUBLYLINKEDLIST_H

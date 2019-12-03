@@ -82,7 +82,7 @@ ReverseDoublyLinkedListIterator<T>::operator bool() const {
 
 template<typename T>
 ReverseDoublyLinkedListIterator<T>& ReverseDoublyLinkedListIterator<T>::operator++() {
-  curNode = curNode->getPrev();
+  curNode = curNode->prev;
   return *this;
 }
 
@@ -95,7 +95,7 @@ const ReverseDoublyLinkedListIterator<T> ReverseDoublyLinkedListIterator<T>::ope
 
 template<typename T>
 ReverseDoublyLinkedListIterator<T>& ReverseDoublyLinkedListIterator<T>::operator--() {
-  curNode = curNode->getNext();
+  curNode = curNode->next;
   return *this;
 }
 
@@ -109,7 +109,7 @@ const ReverseDoublyLinkedListIterator<T> ReverseDoublyLinkedListIterator<T>::ope
 template<typename T>
 typename ReverseDoublyLinkedListIterator<T>::const_reference ReverseDoublyLinkedListIterator<T>::operator*() const {
   if(*this) {
-    return curNode->getValue();
+    return curNode->value;
   }else{
     throw DoublyLinkedListOutOfBoundsError();
   }
@@ -118,7 +118,7 @@ typename ReverseDoublyLinkedListIterator<T>::const_reference ReverseDoublyLinked
 template<typename T>
 typename ReverseDoublyLinkedListIterator<T>::reference ReverseDoublyLinkedListIterator<T>::operator*() {
   if(*this) {
-    return curNode->getValue();
+    return curNode->value;
   }else{
     throw DoublyLinkedListOutOfBoundsError();
   }
