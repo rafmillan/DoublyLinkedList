@@ -7,8 +7,8 @@
 - [ ] DoublyLinkedListEmptyError.cpp
 - [ ] DoublyLinkedListError.h
 - [ ] DoublyLinkedListError.cpp
-- [ ] DoublyLinkedListIterator.h
+- [x] DoublyLinkedListIterator.h
 - [ ] DoublyLinkedListOutOfBoundsError.h
 - [ ] DoublyLinkedListOutOfBoundsError.cpp
 - [x] DoublyLinkedNode.h
-- [ ] ConstReverseDoublyLinkedIterator.h
+- [x] ConstReverseDoublyLinkedIterator.h
