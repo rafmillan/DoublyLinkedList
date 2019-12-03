@@ -87,6 +87,9 @@ class DoublyLinkedList {
   //1 <-> 17
   void erase(iterator& position); //DONE
 
+ protected:
+  void clearImpl(DoublyLinkedNode<T>* node);
+
  private:
   Node_Ptr head;
   Node_Ptr tail;
@@ -184,11 +187,9 @@ void DoublyLinkedList<T>::push_back(const T& value) {
 
 template<typename T>
 void DoublyLinkedList<T>::clear() {
-  for(int i = 0; i < this->size(); i++) {
-    auto tHead= head;
-    delete head;
-    head = tHead->next;
-  }
+  clearImpl(head);
+  head = nullptr;
+  tail = nullptr;
   length = 0;
 }
 
@@ -294,6 +295,16 @@ std::istream& operator>>(std::istream& in, DoublyLinkedList<T>& doublyLinkedList
     doublyLinkedList.push_back(data);
   }
   return in;
+}
+
+template<typename T>
+void clearImpl(DoublyLinkedNode<T>* node){
+  if (node == nullptr) {
+    return;
+  } else {
+    clearImpl(node->next);
+    delete node;
+  }
 }
 
 #endif //LINKEDLIST_DOUBLYLINKEDLIST_H
