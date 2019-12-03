@@ -5,7 +5,12 @@
 #ifndef TESTDOUBLELINKEDLIST_DOUBLYLINKEDLISTERROR_H
 #define TESTDOUBLELINKEDLIST_DOUBLYLINKEDLISTERROR_H
 #include <string>
- class DoublyLinkedListError {
+class DoublyLinkedListError: public std::exception{
+ public:
+
+
+ protected:
+  std::string errorString;
 
 };
 

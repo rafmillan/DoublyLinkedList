@@ -51,63 +51,71 @@ class ConstReverseDoublyLinkedListIterator {
 };
 
 template<typename T>
-ConstReverseDoublyLinkedListIterator<T>::ConstReverseDoublyLinkedListIterator(const DoublyLinkedNode<T>* start) {
+ConstReverseDoublyLinkedListIterator<T>::ConstReverseDoublyLinkedListIterator(const DoublyLinkedNode<T>* start): curNode(start) {
 
 }
 
 template<typename T>
-ConstReverseDoublyLinkedListIterator<T>::ConstReverseDoublyLinkedListIterator() {
+ConstReverseDoublyLinkedListIterator<T>::ConstReverseDoublyLinkedListIterator(): curNode(nullptr){
 
 }
 
 template<typename T>
-ConstReverseDoublyLinkedListIterator<T>::ConstReverseDoublyLinkedListIterator(const ConstReverseDoublyLinkedListIterator<T>& orig) {
+ConstReverseDoublyLinkedListIterator<T>::ConstReverseDoublyLinkedListIterator(const ConstReverseDoublyLinkedListIterator<T>& orig): curNode(orig.curNode) {
 
 }
 
 template<typename T>
 bool ConstReverseDoublyLinkedListIterator<T>::operator==(const ConstReverseDoublyLinkedListIterator<T>& rhs) const {
-
+  return curNode == rhs.curNode;
 }
 
 template<typename T>
 bool ConstReverseDoublyLinkedListIterator<T>::operator!=(const ConstReverseDoublyLinkedListIterator<T>& rhs) const {
-
+  return !(*this == rhs);
 }
 
 template<typename T>
 ConstReverseDoublyLinkedListIterator<T>::operator bool() const {
-
-
+  return curNode != nullptr;
 }
 
 template<typename T>
 ConstReverseDoublyLinkedListIterator<T>& ConstReverseDoublyLinkedListIterator<T>::operator++() {
-
-
+//  ReverseDoublyLinkedListIterator<T> newPos(*this);
+//  newPos = newPos->getPrev();
+//  return newPos;
+  curNode = curNode->getNext();
+  return *this;
 }
 
 template<typename T>
 const ConstReverseDoublyLinkedListIterator<T> ConstReverseDoublyLinkedListIterator<T>::operator++(int) {
-
-
+  ReverseDoublyLinkedListIterator<T> curPos(*this);
+  ++(*this);
+  return curPos;
 }
 
 template<typename T>
 ConstReverseDoublyLinkedListIterator<T>& ConstReverseDoublyLinkedListIterator<T>::operator--() {
-
-
+  curNode = curNode->next;
+  return *this;
 }
 
 template<typename T>
 const ConstReverseDoublyLinkedListIterator<T> ConstReverseDoublyLinkedListIterator<T>::operator--(int) {
-
-
+  ReverseDoublyLinkedListIterator<T> curPos(*this);
+  --(*this);
+  return curPos;
 }
 
 template<typename T>
 typename ConstReverseDoublyLinkedListIterator<T>::reference ConstReverseDoublyLinkedListIterator<T>::operator*() const {
-
+  if(*this) {
+    return this->curNode->value;
+  }else{
+    throw DoublyLinkedListOutOfBoundsError();
+  }
 }
 
 

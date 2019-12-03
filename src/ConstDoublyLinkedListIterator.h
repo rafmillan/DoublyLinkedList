@@ -51,58 +51,68 @@ class ConstDoublyLinkedListIterator {
 };
 
 template<typename T>
-ConstDoublyLinkedListIterator<T>::ConstDoublyLinkedListIterator(const DoublyLinkedNode<T>* start)  {
+ConstDoublyLinkedListIterator<T>::ConstDoublyLinkedListIterator(const DoublyLinkedNode<T>* start): curNode(start)  {
 
 }
 
 template<typename T>
-ConstDoublyLinkedListIterator<T>::ConstDoublyLinkedListIterator()  {
+ConstDoublyLinkedListIterator<T>::ConstDoublyLinkedListIterator(): curNode(nullptr)  {
 
 }
 
 template<typename T>
-ConstDoublyLinkedListIterator<T>::ConstDoublyLinkedListIterator(const ConstDoublyLinkedListIterator<T>& orig) {
+ConstDoublyLinkedListIterator<T>::ConstDoublyLinkedListIterator(const ConstDoublyLinkedListIterator<T>& orig): curNode(orig.curNode) {
 
 }
 
 template<typename T>
 bool ConstDoublyLinkedListIterator<T>::operator==(const ConstDoublyLinkedListIterator<T>& rhs) const {
-
+  return curNode == rhs.curNode;
 }
 
 template<typename T>
 bool ConstDoublyLinkedListIterator<T>::operator!=(const ConstDoublyLinkedListIterator<T>& rhs) const {
-
+  return !(*this == rhs);
 }
 
 template<typename T>
 ConstDoublyLinkedListIterator<T>::operator bool() const {
-
+  return curNode != nullptr;
 }
 
 template<typename T>
 ConstDoublyLinkedListIterator<T>& ConstDoublyLinkedListIterator<T>::operator++() {
-
+  curNode = curNode->getNext();
+  return *this;
 }
 
 template<typename T>
 const ConstDoublyLinkedListIterator<T> ConstDoublyLinkedListIterator<T>::operator++(int) {
-
+  DoublyLinkedListIterator<T> curPos(*this);
+  ++(*this);
+  return curPos;
 }
 
 template<typename T>
 ConstDoublyLinkedListIterator<T>& ConstDoublyLinkedListIterator<T>::operator--() {
-
+  curNode = curNode->getPrev();
+  return *this;
 }
 
 template<typename T>
 const ConstDoublyLinkedListIterator<T> ConstDoublyLinkedListIterator<T>::operator--(int) {
-
+  DoublyLinkedListIterator<T> curPos(*this);
+  --(*this);
+  return curPos;
 }
 
 template<typename T>
 typename ConstDoublyLinkedListIterator<T>::reference ConstDoublyLinkedListIterator<T>::operator*() const {
-
+  if(*this) {
+    return this->curNode->value;
+  }else{
+    throw DoublyLinkedListOutOfBoundsError();
+  }
 }
 
 

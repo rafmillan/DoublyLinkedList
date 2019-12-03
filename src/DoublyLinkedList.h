@@ -22,7 +22,7 @@ class DoublyLinkedList {
   using iterator = DoublyLinkedListIterator<T>; //put the type of your iterator here
   using const_iterator = ConstDoublyLinkedListIterator<T>;//put the type of your const iterator here
   using reverse_iterator = ReverseDoublyLinkedListIterator<T>; //put the type of your reverse iterator here
-  using const_reverse_iterator = ConstReverseDoublyLinkedListIterator<T> //put the type of your const reverse iterator here
+  using const_reverse_iterator = ConstReverseDoublyLinkedListIterator<T>; //put the type of your const reverse iterator here
 
   //create a Doubly Linked List that has the same values
   //as in the vector and in the same order
@@ -118,6 +118,7 @@ DoublyLinkedList<T>::DoublyLinkedList(const std::vector<T>& values)  {
   for (auto elem: values){
     list.push_back(elem);
   }
+  length = values.size();
 }
 
 template<typename T>
@@ -132,22 +133,22 @@ int DoublyLinkedList<T>::size() const {
 
 template<typename T>
 const T& DoublyLinkedList<T>::front() const {
-  return head;
+  return head->getValue();
 }
 
 template<typename T>
 T& DoublyLinkedList<T>::front() {
-  return head;
+  return head->getValue();
 }
 
 template<typename T>
 const T& DoublyLinkedList<T>::back() const {
-  return tail;
+  return tail->getValue();
 }
 
 template<typename T>
 T& DoublyLinkedList<T>::back() {
-  return tail;
+  return tail->getValue();
 }
 
 template<typename T>
@@ -159,8 +160,8 @@ void DoublyLinkedList<T>::push_front(const T& value) {
     tail = node;
   }
   else{
-    head->getprev() = node;
-    node->getNext() = head;
+    head->prev = node;
+    node->next = head;
     head = node;
   }
   length++;
@@ -168,14 +169,15 @@ void DoublyLinkedList<T>::push_front(const T& value) {
 
 template<typename T>
 void DoublyLinkedList<T>::push_back(const T& value) {
-  //DoublyLinkedNode<T>* currNode = new DoublyLinkedNode<T>(value);
-  auto* currNode = new DoublyLinkedNode<T>(value);
-  if(head){
-    tail->getNext() = currNode;
-    currNode->getPrev() = tail;
-    currNode->getNext() = nullptr;
+  DoublyLinkedNode<T>* currNode = new DoublyLinkedNode<T>(value);
+  if (head)
+  {
+    tail->next = currNode;
+    currNode -> prev = tail;
+    currNode -> next = nullptr;
   }
-  else{
+  else
+  {
     head = currNode;
     tail = currNode;
   }
@@ -206,42 +208,57 @@ DoublyLinkedList<T>::~DoublyLinkedList() {
 
 template<typename T>
 typename DoublyLinkedList<T>::const_iterator DoublyLinkedList<T>::begin() const {
-  return head;
+  return ConstDoublyLinkedListIterator<T>(head);
 }
 
 template<typename T>
 typename DoublyLinkedList<T>::const_iterator DoublyLinkedList<T>::end() const {
-  return tail;
+  return ConstDoublyLinkedListIterator<T>(nullptr);
 }
 
 template<typename T>
 typename DoublyLinkedList<T>::iterator DoublyLinkedList<T>::begin() {
-  return head;
+  return DoublyLinkedListIterator<T>(head);
 }
 
 template<typename T>
 typename DoublyLinkedList<T>::iterator DoublyLinkedList<T>::end() {
-  return tail;
+  return DoublyLinkedListIterator<T>(tail);
 }
 
 template<typename T>
 void DoublyLinkedList<T>::insert(iterator& position, const T& value) {
-  Node_Ptr newNode;
+  DoublyLinkedNode<T>* newNode = new DoublyLinkedNode<T>(value);
 
   newNode->getValue() = value;
-  newNode->getNext() = position;
-  newNode->getPrev() = position->getPrev();
+  newNode->next = position.getNode();
+  newNode->prev = position.getNode()->prev;
 
-  position->getPrev()->getNext() = newNode;
-  position->getprev() = newNode;
+  position.getNode()->prev->next = newNode;
+  position.getNode()->prev = newNode;
 
 }
 
 template<typename T>
 void DoublyLinkedList<T>::erase(iterator& position) {
-  position->getPrev()->getNext() = position->getNext();
-  position->getNext()->getPrev() = position->getPrev();
-  delete position;
+  if (position.getNode() == head) {
+    head = head->next;
+    if (head != nullptr) {
+      head->next = nullptr;
+    }
+    else {
+      tail = nullptr;
+    }
+  }
+  else if (position.getNode() == tail) {
+    tail = tail->prev;
+    tail->next = nullptr;
+  }
+  else {
+    position.getNode()->next->prev = position.getNode()->prev;
+    position.getNode()->prev->next = position.getNode()->prev;
+  }
+  length--;
 }
 
 template<typename T>
@@ -278,12 +295,11 @@ std::ostream& operator<<(std::ostream& out, const DoublyLinkedList<T>& doublyLin
 
 template<typename T>
 std::istream& operator>>(std::istream& in, DoublyLinkedList<T>& doublyLinkedList) {
-  while(in) {
-    T data;
-    in >> data;
-    if (data == '\n' || data == EOF) {
-      break;
-    }
+  T data;
+  while(in >> data) {
+//    if (data == '\n') {
+//      break;
+//    }
     doublyLinkedList.push_back(data);
   }
   return in;

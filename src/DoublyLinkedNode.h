@@ -11,6 +11,8 @@ class DoublyLinkedList;
 template<typename T>
 class DoublyLinkedListIterator;
 template<typename T>
+class ReverseDoublyLinkedListIterator;
+template<typename T>
 class ConstDoublyLinkedListIterator;
 template<typename T>
 class ConstReverseDoublyLinkedListIterator;
@@ -18,20 +20,18 @@ class ConstReverseDoublyLinkedListIterator;
 template<typename T>
 class DoublyLinkedNode {
 
-private:
+ public:
   T value;
   DoublyLinkedNode<T>* next;
   DoublyLinkedNode<T>*  prev;
-
- public:
   DoublyLinkedNode() = default;
   explicit DoublyLinkedNode(T val) : value(val), next(nullptr), prev(nullptr) {}
 
-  DoublyLinkedNode<T>* getNext() {
+  DoublyLinkedNode<T>* getNext() const{
     return this->next;
   }
 
-  DoublyLinkedNode<T>* getPrev() {
+  DoublyLinkedNode<T>* getPrev() const{
     return this->prev;
   }
   T& getValue() {

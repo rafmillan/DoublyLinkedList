@@ -48,6 +48,11 @@ class DoublyLinkedListIterator {
   const_reference operator*() const; //Done
   reference operator*(); //Done
 
+  DoublyLinkedNode<T>* getNode() {
+
+    return this->curNode;
+  }
+
  private:
   DoublyLinkedNode<T>* curNode;
 };
@@ -78,12 +83,6 @@ bool DoublyLinkedListIterator<T>::operator!=(const DoublyLinkedListIterator<T>& 
 template<typename T>
 DoublyLinkedListIterator<T>::operator bool() const {
   return curNode != nullptr;
-}
-
-template<typename T>
-DoublyLinkedListIterator<T>& DoublyLinkedListIterator<T>::operator++() {
-  curNode = curNode->getNext();
-  return *this;
 }
 
 template<typename T>
