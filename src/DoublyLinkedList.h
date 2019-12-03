@@ -170,14 +170,12 @@ void DoublyLinkedList<T>::push_front(const T& value) {
 template<typename T>
 void DoublyLinkedList<T>::push_back(const T& value) {
   DoublyLinkedNode<T>* currNode = new DoublyLinkedNode<T>(value);
-  if (head)
-  {
+  if (head){
     tail->next = currNode;
     currNode -> prev = tail;
     currNode -> next = nullptr;
   }
-  else
-  {
+  else {
     head = currNode;
     tail = currNode;
   }
