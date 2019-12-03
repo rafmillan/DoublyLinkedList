@@ -154,12 +154,24 @@ T& DoublyLinkedList<T>::back() {
 template<typename T>
 void DoublyLinkedList<T>::push_front(const T& value) {
   //DoublyLinkedNode<T>* node= new DoublyLinkedNode<T>(value);
-  auto* node= new DoublyLinkedNode<T>(value);
-  if (head == nullptr){
+//  auto* node= new DoublyLinkedNode<T>(value);
+//  if (head == nullptr){
+//    head = node;
+//    tail = node;
+//  }
+//  else{
+//    head->prev = node;
+//    node->next = head;
+//    head = node;
+//  }
+//  length++;
+
+  DoublyLinkedNode<T>* node = new DoublyLinkedNode<T>(value);
+  if(head == nullptr) {
     head = node;
     tail = node;
   }
-  else{
+  else {
     head->prev = node;
     node->next = head;
     head = node;
@@ -169,15 +181,31 @@ void DoublyLinkedList<T>::push_front(const T& value) {
 
 template<typename T>
 void DoublyLinkedList<T>::push_back(const T& value) {
-  DoublyLinkedNode<T>* currNode = new DoublyLinkedNode<T>(value);
-  if (head){
-    tail->next = currNode;
-    currNode -> prev = tail;
-    currNode -> next = nullptr;
+//  DoublyLinkedNode<T>* currNode = new DoublyLinkedNode<T>(value);
+//  if (head){
+//    tail->next = currNode;
+//    currNode -> prev = tail;
+//    currNode -> next = nullptr;
+//  }
+//  else {
+//    head = currNode;
+//    tail = currNode;
+//  }
+//  length++;
+  DoublyLinkedNode<T>* node = new DoublyLinkedNode<T>(value);
+  if(head == nullptr) {
+    tail = node;
+    head = node;
+  }
+  else if (this->length == 1) {
+    tail = node;
+    head->next = tail;
+    tail->prev = head;
   }
   else {
-    head = currNode;
-    tail = currNode;
+    tail->next = node;
+    node->next = tail;
+    tail = node;
   }
   length++;
 }
