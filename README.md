@@ -1,7 +1,7 @@
 # DoublyLinkedList
 
-- [ ] ConstDoublyListIterator.h
-- [ ] ConstReverseDoublyLinkedIterator.h
+- [x] ConstDoublyListIterator.h
+- [x] ConstReverseDoublyLinkedIterator.h
 - [x] DoublyLinkedList.h
 - [ ] DoublyLinkedListEmptyError.h
 - [ ] DoublyLinkedListEmptyError.cpp
@@ -11,4 +11,4 @@
 - [ ] DoublyLinkedListOutOfBoundsError.h
 - [ ] DoublyLinkedListOutOfBoundsError.cpp
 - [x] DoublyLinkedNode.h
-- [x] ConstReverseDoublyLinkedIterator.h
+- [x] ReverseDoublyLinkedIterator.h
