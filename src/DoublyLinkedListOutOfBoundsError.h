@@ -4,8 +4,9 @@
 
 #ifndef TESTDOUBLELINKEDLIST_DOUBLYLINKEDLISTOUTOFBOUNDSERROR_H
 #define TESTDOUBLELINKEDLIST_DOUBLYLINKEDLISTOUTOFBOUNDSERROR_H
+
 #include "DoublyLinkedListError.h"
-class DoublyLinkedListOutOfBoundsError  {
+class DoublyLinkedListOutOfBoundsError: public DoublyLinkedListError  {
 
 };
 

@@ -118,7 +118,4 @@ typename ConstReverseDoublyLinkedListIterator<T>::reference ConstReverseDoublyLi
   }
 }
 
-
-
-
 #endif //DLLPROJECT_CONSTREVERSEDOUBLYLINKEDITERATOR_H
