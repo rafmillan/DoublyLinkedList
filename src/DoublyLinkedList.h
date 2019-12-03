@@ -217,6 +217,7 @@ void DoublyLinkedList<T>::clear() {
 //  }
 //  delete tail;
 //  tail = nullptr;
+//  length = 0;
   for (int i = 0; i < this->size(); i++) {
     auto temp = head;
     delete head;
