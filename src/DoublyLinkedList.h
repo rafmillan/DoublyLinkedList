@@ -87,10 +87,15 @@ class DoublyLinkedList {
   //1 <-> 17
   void erase(iterator& position); //DONE
 
+  DoublyLinkedNode<T>* getTail() const;
+  void setTail(DoublyLinkedNode<T> *node);
+  void incLength();
+
  private:
   Node_Ptr head = nullptr;
   Node_Ptr tail = nullptr;
   int length = 0;
+
 
 };
 
@@ -286,6 +291,19 @@ template<typename T>
 typename DoublyLinkedList<T>::reverse_iterator DoublyLinkedList<T>::rend() {
   return ReverseDoublyLinkedListIterator<T>(nullptr);
 }
+template<typename T>
+DoublyLinkedNode<T>* DoublyLinkedList<T>::getTail() const {
+  return tail;
+}
+template<typename T>
+void DoublyLinkedList<T>::setTail(DoublyLinkedNode<T> *node) {
+  DoublyLinkedList::tail = node;
+}
+
+template<typename T>
+void DoublyLinkedList<T>::incLength() {
+  DoublyLinkedList::length = length + 1;
+}
 
 template<typename T>
 std::ostream& operator<<(std::ostream& out, const DoublyLinkedList<T>& doublyLinkedList) {
@@ -301,9 +319,22 @@ std::ostream& operator<<(std::ostream& out, const DoublyLinkedList<T>& doublyLin
 
 template<typename T>
 std::istream& operator>>(std::istream& in, DoublyLinkedList<T>& doublyLinkedList) {
+//  T data;
+//  while(in >> data){
+//    DoublyLinkedNode<T>* newNode = new DoublyLinkedNode<T>(data);
+//    newNode->prev = doublyLinkedList.getTail();
+//    doublyLinkedList.getTail()->next = newNode;
+//    doublyLinkedList.setTail(newNode);
+//    doublyLinkedList.incLength();
+//  }
+//  return in;
+
   T data;
-  while(in >> data) {
+  char c = in.peek();
+  while(c != EOF){
+    in >> data;
     doublyLinkedList.push_back(data);
+    c = in.peek();
   }
   return in;
 }
