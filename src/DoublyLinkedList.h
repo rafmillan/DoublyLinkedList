@@ -35,7 +35,7 @@ class DoublyLinkedList {
   virtual ~DoublyLinkedList(); //DONE
 
   //remove all of the elements from your list
-  void clear(); //DONE
+  void clear(); //Not Done
 
   //get a reference to the front element in the list
   const T& front() const; //DONE
@@ -88,9 +88,9 @@ class DoublyLinkedList {
   void erase(iterator& position); //DONE
 
  private:
-  Node_Ptr head;
-  Node_Ptr tail;
-  int length;
+  Node_Ptr head = nullptr;
+  Node_Ptr tail = nullptr;
+  int length = 0;
 
 };
 
@@ -112,11 +112,11 @@ DoublyLinkedList<T>::DoublyLinkedList()  {
   length = 0;
 }
 
+//Todo: is this right?
 template<typename T>
 DoublyLinkedList<T>::DoublyLinkedList(const std::vector<T>& values)  {
-  DoublyLinkedList list;
   for (auto elem: values) {
-    list.push_back(elem);
+    push_back(elem);
   }
 }
 
@@ -130,6 +130,7 @@ int DoublyLinkedList<T>::size() const {
   return length;
 }
 
+//Todo: Need to add the empty error for front and back
 template<typename T>
 const T& DoublyLinkedList<T>::front() const {
   return head->value;
@@ -150,20 +151,9 @@ T& DoublyLinkedList<T>::back() {
   return tail->value;
 }
 
+//Probably broken too
 template<typename T>
 void DoublyLinkedList<T>::push_front(const T& value) {
-  //DoublyLinkedNode<T>* node= new DoublyLinkedNode<T>(value);
-//  auto* node= new DoublyLinkedNode<T>(value);
-//  if (head == nullptr){
-//    head = node;
-//    tail = node;
-//  }
-//  else{
-//    head->prev = node;
-//    node->next = head;
-//    head = node;
-//  }
-//  length++;
 
   DoublyLinkedNode<T>* node = new DoublyLinkedNode<T>(value);
   if(head == nullptr) {
@@ -171,63 +161,50 @@ void DoublyLinkedList<T>::push_front(const T& value) {
     tail = node;
   }
   else {
-    head->prev = node;
     node->next = head;
+    node->next->prev = node;
+    node -> prev = nullptr;
     head = node;
   }
-  length++;
+  this->length++;
 }
 
+//Is this broken?
+//Most Likely ;_;
 template<typename T>
 void DoublyLinkedList<T>::push_back(const T& value) {
-//  DoublyLinkedNode<T>* currNode = new DoublyLinkedNode<T>(value);
-//  if (head){
-//    tail->next = currNode;
-//    currNode -> prev = tail;
-//    currNode -> next = nullptr;
-//  }
-//  else {
-//    head = currNode;
-//    tail = currNode;
-//  }
-//  length++;
   DoublyLinkedNode<T>* node = new DoublyLinkedNode<T>(value);
-  if(head == nullptr) {
+  if(tail == nullptr) {
     tail = node;
     head = node;
   }
-  else if (this->length == 1) {
-    tail = node;
-    head->next = tail;
-    tail->prev = head;
-  }
-  else {
-    tail->next = node;
-    node->next = tail;
+  else{
+    node->prev = tail;
+    node->prev->next = node;
+    node->next = nullptr;
     tail = node;
   }
   length++;
 }
 
+//todo: is broken :(, Not properly deleting all memory
+//Only thing I can think of that might be wrong is the way we are creating the doubly Linked List that is causing us problems.
 template<typename T>
 void DoublyLinkedList<T>::clear() {
-//  while (head != nullptr) {
-//  head = head->next;
-//  delete head->prev;
-//  }
-//  delete tail;
-//  tail = nullptr;
-//  length = 0;
-  for (int i = 0; i < this->size(); i++) {
-    auto temp = head;
-    delete head;
-    head = temp->next;
+  while(head){
+    DoublyLinkedNode<T>* Node = head;
+    head = head->next;
+    head->prev = nullptr;
+    delete Node;
+    length--;
   }
-  length = 0;
+  tail = nullptr;
 }
+
+//Another Possiblity is that this is breaking my code?
 template<typename T>
 DoublyLinkedList<T>::~DoublyLinkedList() {
-  clear();
+  //clear();
 }
 
 template<typename T>
@@ -321,9 +298,6 @@ template<typename T>
 std::istream& operator>>(std::istream& in, DoublyLinkedList<T>& doublyLinkedList) {
   T data;
   while(in >> data) {
-//    if (data == '\n') {
-//      break;
-//    }
     doublyLinkedList.push_back(data);
   }
   return in;

@@ -21,9 +21,9 @@ template<typename T>
 class DoublyLinkedNode {
 
  public:
-  T value;
-  DoublyLinkedNode<T>* next;
-  DoublyLinkedNode<T>*  prev;
+  T value = new T;
+  DoublyLinkedNode<T>* next = new T;
+  DoublyLinkedNode<T>* prev = new T;
   DoublyLinkedNode() = default;
   explicit DoublyLinkedNode(T val) : value(val), next(nullptr), prev(nullptr) {}
 
