@@ -189,6 +189,7 @@ void DoublyLinkedList<T>::push_back(const T& value) {
 
 //todo: is broken :(, Not properly deleting all memory
 //Only thing I can think of that might be wrong is the way we are creating the doubly Linked List that is causing us problems.
+//Something, somewhere in our code is breaking this. Tutor couldn't figure it out, but he said we may be debugging at the wrong place.
 template<typename T>
 void DoublyLinkedList<T>::clear() {
   while(head){
@@ -202,6 +203,7 @@ void DoublyLinkedList<T>::clear() {
 }
 
 //Another Possiblity is that this is breaking my code?
+//Automatically called whenever constructor is called, supposed to happen
 template<typename T>
 DoublyLinkedList<T>::~DoublyLinkedList() {
   //clear();

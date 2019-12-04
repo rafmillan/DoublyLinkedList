@@ -85,7 +85,7 @@ ConstReverseDoublyLinkedListIterator<T>& ConstReverseDoublyLinkedListIterator<T>
 //  ReverseDoublyLinkedListIterator<T> newPos(*this);
 //  newPos = newPos->getPrev();
 //  return newPos;
-  curNode = curNode->next;
+  curNode = curNode->prev;
   return *this;
 }
 
