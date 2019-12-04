@@ -6,7 +6,9 @@
 #define TESTDOUBLELINKEDLIST_DOUBLYLINKEDLISTOUTOFBOUNDSERROR_H
 
 #include "DoublyLinkedListError.h"
-class DoublyLinkedListOutOfBoundsError: public DoublyLinkedListError  {
+class DoublyLinkedListOutOfBoundsError: public virtual DoublyLinkedListError  {
+ public:
+  DoublyLinkedListOutOfBoundsError();
 
 };
 

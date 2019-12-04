@@ -138,22 +138,42 @@ int DoublyLinkedList<T>::size() const {
 //Todo: Need to add the empty error for front and back
 template<typename T>
 const T& DoublyLinkedList<T>::front() const {
-  return head->value;
+  try{
+    return head->value;
+  }
+  catch(DoublyLinkedListOutOfBoundsError& out){
+    std::cout << out.what() << std::endl;
+  }
+
+
 }
 
 template<typename T>
 T& DoublyLinkedList<T>::front() {
-  return head->value;
+
+
+  if(head){
+    return head->value;
+  }
+    else throw DoublyLinkedListEmptyError();
 }
 
 template<typename T>
 const T& DoublyLinkedList<T>::back() const {
-  return tail->value;
+  if(head){
+    return tail->value;
+  }
+  else throw DoublyLinkedListEmptyError();
+
 }
 
 template<typename T>
 T& DoublyLinkedList<T>::back() {
-  return tail->value;
+  if(head){
+    return tail->value;
+  }
+  else throw DoublyLinkedListEmptyError();
+
 }
 
 template<typename T>
@@ -172,8 +192,7 @@ void DoublyLinkedList<T>::push_front(const T& value) {
   this->length++;
 }
 
-//Is this broken?
-//Most Likely ;_;
+
 template<typename T>
 void DoublyLinkedList<T>::push_back(const T& value) {
   DoublyLinkedNode<T>* node = new DoublyLinkedNode<T>(value);

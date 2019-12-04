@@ -6,8 +6,9 @@
 #define TESTDOUBLELINKEDLIST_DOUBLYLINKEDLISTEMPTYERROR_H
 
 #include "DoublyLinkedListError.h"
-class DoublyLinkedListEmptyError: public DoublyLinkedListError  {
-
+class DoublyLinkedListEmptyError: public virtual DoublyLinkedListError  {
+ public:
+  DoublyLinkedListEmptyError();
 };
 
 #endif //TESTDOUBLELINKEDLIST_DOUBLYLINKEDLISTEMPTYERROR_H
