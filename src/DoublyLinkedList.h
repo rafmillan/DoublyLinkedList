@@ -251,7 +251,7 @@ void DoublyLinkedList<T>::erase(iterator& position) {
   if (position.getNode() == head) {
     head = head->next;
     if (head != nullptr) {
-      head->next = nullptr;
+      head->prev = nullptr;
     }
     else {
       tail = nullptr;
@@ -263,7 +263,7 @@ void DoublyLinkedList<T>::erase(iterator& position) {
   }
   else {
     position.getNode()->next->prev = position.getNode()->prev;
-    position.getNode()->prev->next = position.getNode()->prev;
+    position.getNode()->prev->next = position.getNode()->next;
   }
   length--;
 }
