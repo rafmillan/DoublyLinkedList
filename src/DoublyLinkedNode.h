@@ -22,8 +22,8 @@ class DoublyLinkedNode {
 
  public:
   T value = new T;
-  DoublyLinkedNode<T>* next = new T;
-  DoublyLinkedNode<T>* prev = new T;
+  DoublyLinkedNode<T>* next = new DoublyLinkedNode<T>*;
+  DoublyLinkedNode<T>* prev = new DoublyLinkedNode<T>*;
   DoublyLinkedNode() = default;
   explicit DoublyLinkedNode(T val) : value(val), next(nullptr), prev(nullptr) {}
 

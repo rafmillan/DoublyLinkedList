@@ -81,7 +81,7 @@ bool DoublyLinkedListIterator<T>::operator!=(const DoublyLinkedListIterator<T>& 
 }
 
 template<typename T>
-DoublyLinkedListIterator<T>::operator bool() const {
+DoublyLinkedListIterator<T>::operator bool() const{
   return curNode != nullptr;
 }
 

@@ -26,39 +26,39 @@ class DoublyLinkedList {
 
   //create a Doubly Linked List that has the same values
   //as in the vector and in the same order
-  explicit DoublyLinkedList(const std::vector<T>& values); //TODO WHAT IS WRONG HERE
+  explicit DoublyLinkedList(const std::vector<T>& values); //Done, tests passed, BUT there is a possibility something here is messing with our clear function
 
   //create an empty DoublyLinkedList
   DoublyLinkedList(); //DONE
 
   //destructor
-  virtual ~DoublyLinkedList(); //DONE
+  virtual ~DoublyLinkedList(); //broken, does not properly destroys memory
 
   //remove all of the elements from your list
-  void clear(); //Not Done
+  void clear(); //Not Done, very broke, same as destructor
 
   //get a reference to the front element in the list
-  const T& front() const; //DONE
-  T& front(); //DONE
+  const T& front() const; //Not Done, need to implement error handling
+  T& front(); //not Done, need to implement error handling
 
   //get a reference to the last element in the list
-  const T& back() const; //DONE
-  T& back(); //DONE
+  const T& back() const; //not DOne, need to implement error handling
+  T& back(); //Not done, need to implement error handling
 
   //add a value to the front of the list
-  void push_front(const T& value); //DONE
+  void push_front(const T& value); //DONE, passed test cases, but may be messing with clear function
 
   //add a value to the back of the list
-  void push_back(const T& value); //DONE
+  void push_back(const T& value); //DONE, passed test cases, but may be messing with clear function
 
   //is the list empty?
-  bool empty() const; //DOME
+  bool empty() const; //DONE
 
   //return the number of elements in the list
   int size() const; //DONE
 
   //return a constant bidirectional iterator to the front of the list
-  const_iterator begin() const; //DONE
+  const_iterator begin() const; //DONE,
   const_iterator end() const; //DONE
 
   //return a nonconstant bidirectional iterator to the front of the list
@@ -262,8 +262,11 @@ void DoublyLinkedList<T>::erase(iterator& position) {
     position.getNode()->prev->next = position.getNode()->prev;
   }
   length--;
-}
 
+
+
+
+}
 template<typename T>
 typename DoublyLinkedList<T>::const_reverse_iterator DoublyLinkedList<T>::crbegin() const {
   return ConstReverseDoublyLinkedListIterator<T>(tail);

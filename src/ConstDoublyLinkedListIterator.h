@@ -88,7 +88,7 @@ ConstDoublyLinkedListIterator<T>& ConstDoublyLinkedListIterator<T>::operator++()
 
 template<typename T>
 const ConstDoublyLinkedListIterator<T> ConstDoublyLinkedListIterator<T>::operator++(int) {
-  DoublyLinkedListIterator<T> curPos(*this);
+ ConstDoublyLinkedListIterator<T> curPos(*this);
   ++(*this);
   return curPos;
 }
@@ -101,7 +101,7 @@ ConstDoublyLinkedListIterator<T>& ConstDoublyLinkedListIterator<T>::operator--()
 
 template<typename T>
 const ConstDoublyLinkedListIterator<T> ConstDoublyLinkedListIterator<T>::operator--(int) {
-  DoublyLinkedListIterator<T> curPos(*this);
+  ConstDoublyLinkedListIterator<T> curPos(*this);
   --(*this);
   return curPos;
 }
