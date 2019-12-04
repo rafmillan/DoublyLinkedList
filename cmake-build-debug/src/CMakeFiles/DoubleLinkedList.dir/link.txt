@@ -1,2 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/ar qc libDoubleLinkedList.a  CMakeFiles/DoubleLinkedList.dir/DoublyLinkedListError.cpp.o CMakeFiles/DoubleLinkedList.dir/DoublyLinkedListEmptyError.cpp.o CMakeFiles/DoubleLinkedList.dir/DoublyLinkedListOutOfBoundsError.cpp.o
-/Library/Developer/CommandLineTools/usr/bin/ranlib libDoubleLinkedList.a
