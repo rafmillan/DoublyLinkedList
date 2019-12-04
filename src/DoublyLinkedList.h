@@ -234,11 +234,14 @@ void DoublyLinkedList<T>::insert(iterator& position, const T& value) {
   if(position.getNode() == head){
     push_front(value);
   }
+  else if(position.getNode() == nullptr){
+    push_back(value);
+  }
   else{
     position.getNode()->prev->next = newNode;
     newNode->prev = position.getNode()->prev;
     newNode->next = position.getNode();
-    position.getNode()->prev = newNode();
+    position.getNode()->prev = newNode;
     length++;
   }
 }
