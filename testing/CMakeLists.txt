@@ -26,4 +26,4 @@ target_link_libraries(DoubleLinkedListTester
         gtest
         gmock
         )
-target_compile_options(DoubleLinkedListTester PRIVATE -Wall -Werror -Wextra)
+target_compile_options(DoubleLinkedListTester PRIVATE -Wall -Wextra)
