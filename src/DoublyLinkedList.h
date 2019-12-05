@@ -338,22 +338,9 @@ std::ostream& operator<<(std::ostream& out, const DoublyLinkedList<T>& doublyLin
 
 template<typename T>
 std::istream& operator>>(std::istream& in, DoublyLinkedList<T>& doublyLinkedList) {
-//  T data;
-//  while(in >> data){
-//    DoublyLinkedNode<T>* newNode = new DoublyLinkedNode<T>(data);
-//    newNode->prev = doublyLinkedList.getTail();
-//    doublyLinkedList.getTail()->next = newNode;
-//    doublyLinkedList.setTail(newNode);
-//    doublyLinkedList.incLength();
-//  }
-//  return in;
-
   T data;
-  char c = in.peek();
-  while(c != EOF){
-    in >> data;
+  while(in>>data){
     doublyLinkedList.push_back(data);
-    c = in.peek();
   }
   return in;
 }
